@@ -41,14 +41,41 @@
     align-items: center;
     justify-content: center;
     margin: 10px;
-    font-size: 25px;
+    font-size: 30px;
     position: relative;
+    transition: all 0.2s;
+}
+
+.key.pressed {
+    height: 98px;
+    background-color: aqua;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
 .upperKey {
     position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.caps::after {
+    content: '';
     top: 10px;
-    left: 10px;
+    right: 10px;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.caps.active::after {
+    background: white;
+}
+
+.bigger-width {
+    width: 160px;
 }
 
 .middle-width {
@@ -56,5 +83,5 @@
 }
 
 .lage-width {
-    width: 500px;
+    width: 760px;
 }
