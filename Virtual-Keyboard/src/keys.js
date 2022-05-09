@@ -1,27 +1,3 @@
-// const keyLang = {
-//   'en': {
-//     'default': ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
-//     'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Delete',
-//     'Caps Lock', 'a', 's', 'f', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'ENTER',
-//     'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'ArrowUp', 'Shift', 'Control',
-//     'Win', 'Alt', 'Space', 'Alt', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Control ',
-//     ],
-//     'shift': ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+'
-//     ],
-//   },
-//   ru: {
-//     'default': ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
-//     'Tab', 'й', 'ц', 'у', 'к', 'е',
-//     'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Delete', 'Caps Lock', 'ф', 'ы', 'в', 'а', 'п',
-//     'р', 'о', 'л', 'д', 'ж', "э", 'ENTER',
-//     'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'ArrowUp', 'Shift', 'Control',
-//     'Win', 'Alt', 'Space', 'Alt', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Control ',
-//     ],
-//     'shift': ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+'
-//     ],
-//   },
-// };
-
 const keyLang = {
   en: {
     default: {

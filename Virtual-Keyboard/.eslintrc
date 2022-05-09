@@ -4,4 +4,8 @@
         "browser": true,
         "node": true
     }
+    // "import/extensions": {
+    //     "js": "always",
+    //     "json": "never"
+    // }
 }
