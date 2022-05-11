@@ -5,8 +5,24 @@ const keysEnShift = keyLang.en.shift;
 const keysRu = keyLang.ru.default;
 const keysRuShift = keyLang.ru.shift;
 
-let currentLang = keysEn;
-let currentLangShift = keysEnShift;
+let currentLang;
+let currentLangShift;
+let lang = localStorage.getItem('lang');
+
+if (lang) {
+  lang = localStorage.getItem('lang');
+} else {
+  lang = 'en';
+}
+console.log(lang);
+
+if (lang === 'en') {
+  currentLang = keysEn;
+  currentLangShift = keysEnShift;
+} else {
+  currentLang = keysRu;
+  currentLangShift = keysRuShift;
+}
 
 // console.log(currentLang);
 
@@ -65,7 +81,7 @@ function addKeys() {
           keyElement.classList.toggle('active');
           if (keyElement.classList.contains('active')) {
             document.querySelectorAll('.key').forEach((e) => {
-              console.log(e.dataset.key.slice(0, 3));
+              // console.log(e.dataset.key.slice(0, 3));
               if (e.dataset.key.slice(0, 3) === 'Key' || e.dataset.key.slice(0, 3) === 'Bra'
               || e.dataset.key === 'Semicolon' || e.dataset.key === 'Quote' || e.dataset.key === 'Comma'
               || e.dataset.key === 'Period') {
@@ -88,6 +104,9 @@ function addKeys() {
         break;
       case 'ShiftLeft':
         keyElement.classList.add('middle-width');
+        // keyElement.addEventListener('click', () => {
+
+        // });
         break;
       case 'ShiftRight':
         keyElement.classList.add('middle-width');
@@ -119,7 +138,10 @@ function addKeys() {
         break;
     }
     keyboard.appendChild(keyElement);
-    keyElement.appendChild(upperKeyElement);
+    if (keyElement.dataset.key.slice(0, 3) === 'Dig') {
+      console.log(keyElement.dataset.key.slice(0, 3));
+      keyElement.appendChild(upperKeyElement);
+    }
     keyElement.addEventListener('mousedown', () => {
       keyElement.classList.add('pressed');
       textArea.focus();
@@ -130,7 +152,13 @@ function addKeys() {
       && keyElement.dataset.key !== 'MetaLeft' && keyElement.dataset.key !== 'AltLeft'
       && keyElement.dataset.key !== 'Space' && keyElement.dataset.key !== 'AltRight'
       && keyElement.dataset.key !== 'ControlRight') {
-        textArea.setRangeText(keyElement.textContent);
+        if (keyElement.dataset.key.slice(0, 3) === 'Dig') {
+          textArea.setRangeText(keyElement.dataset.key.slice(5, 6));
+        } else {
+          const position = textArea.selectionStart;
+          textArea.value = textArea.value.slice(0, position) + keyElement.textContent
+          + textArea.value.slice(textArea.selectionEnd);
+        }
       }
     });
     keyElement.addEventListener('mouseup', () => {
@@ -154,7 +182,7 @@ window.addEventListener('keydown', (e) => {
     document.querySelector('[data-key="CapsLock"]').classList.toggle('active');
     if (document.querySelector('[data-key="CapsLock"]').classList.contains('active')) {
       document.querySelectorAll('.key').forEach((e) => {
-        console.log(e.dataset.key.slice(0, 3));
+        // console.log(e.dataset.key.slice(0, 3));
         if (e.dataset.key.slice(0, 3) === 'Key' || e.dataset.key.slice(0, 3) === 'Bra'
         || e.dataset.key === 'Semicolon' || e.dataset.key === 'Quote' || e.dataset.key === 'Comma'
         || e.dataset.key === 'Period') {
@@ -175,20 +203,14 @@ window.addEventListener('keydown', (e) => {
   if (e.code === 'ShiftLeft') {
     window.addEventListener('keydown', (e) => {
       if (e.code === 'ControlLeft') {
-        // console.log('currentLang', currentLang);
-        // console.log('keysEn', currentLang);
         if (currentLang === keysEn) {
-          console.log('localStorageRu', localStorage);
-          localStorage.setItem('currentLang', JSON.stringify(keysRu));
-          // localStorage.setItem('currentLangShift', JSON.stringify(keysRuShift));
+          localStorage.setItem('lang', 'ru');
           currentLang = keysRu;
           currentLangShift = keysRuShift;
           keyboard.innerHTML = '';
           addKeys();
         } else {
-          console.log('localStorageEn', localStorage);
-          localStorage.setItem('currentLang', JSON.stringify(keysEn));
-          // localStorage.setItem('currentLangShift', JSON.stringify(keysEnShift));
+          localStorage.setItem('lang', 'en');
           currentLang = keysEn;
           currentLangShift = keysEnShift;
           keyboard.innerHTML = '';
