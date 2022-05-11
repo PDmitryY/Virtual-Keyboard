@@ -105,7 +105,11 @@ function addKeys() {
       case 'ShiftLeft':
         keyElement.classList.add('middle-width');
         // keyElement.addEventListener('click', () => {
-
+        //   const temp = currentLang;
+        //   currentLang = currentLangShift;
+        //   currentLangShift = temp;
+        //   keyboard.innerHTML = '';
+        //   addKeys();
         // });
         break;
       case 'ShiftRight':
@@ -153,7 +157,9 @@ function addKeys() {
       && keyElement.dataset.key !== 'Space' && keyElement.dataset.key !== 'AltRight'
       && keyElement.dataset.key !== 'ControlRight') {
         if (keyElement.dataset.key.slice(0, 3) === 'Dig') {
-          textArea.setRangeText(keyElement.dataset.key.slice(5, 6));
+          const position = textArea.selectionStart;
+          textArea.value = textArea.value.slice(0, position) + keyElement.dataset.key.slice(5, 6)
+          + textArea.value.slice(textArea.selectionEnd);
         } else {
           const position = textArea.selectionStart;
           textArea.value = textArea.value.slice(0, position) + keyElement.textContent
