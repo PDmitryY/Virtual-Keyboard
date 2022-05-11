@@ -104,6 +104,9 @@ function addKeys() {
         break;
       case 'ShiftLeft':
         keyElement.classList.add('middle-width');
+        // keyElement.addEventListener('click', () => {
+
+        // });
         break;
       case 'ShiftRight':
         keyElement.classList.add('middle-width');
@@ -135,7 +138,10 @@ function addKeys() {
         break;
     }
     keyboard.appendChild(keyElement);
-    keyElement.appendChild(upperKeyElement);
+    if (keyElement.dataset.key.slice(0, 3) === 'Dig') {
+      console.log(keyElement.dataset.key.slice(0, 3));
+      keyElement.appendChild(upperKeyElement);
+    }
     keyElement.addEventListener('mousedown', () => {
       keyElement.classList.add('pressed');
       textArea.focus();
@@ -146,7 +152,13 @@ function addKeys() {
       && keyElement.dataset.key !== 'MetaLeft' && keyElement.dataset.key !== 'AltLeft'
       && keyElement.dataset.key !== 'Space' && keyElement.dataset.key !== 'AltRight'
       && keyElement.dataset.key !== 'ControlRight') {
-        textArea.setRangeText(keyElement.textContent);
+        if (keyElement.dataset.key.slice(0, 3) === 'Dig') {
+          textArea.setRangeText(keyElement.dataset.key.slice(5, 6));
+        } else {
+          const position = textArea.selectionStart;
+          textArea.value = textArea.value.slice(0, position) + keyElement.textContent
+          + textArea.value.slice(textArea.selectionEnd);
+        }
       }
     });
     keyElement.addEventListener('mouseup', () => {
